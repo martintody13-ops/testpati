@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Test de Vibes 💫</title>
+  <meta name="description" content="Un test breve para descubrir tu vibra y proponer un plan coquetón (suavecito)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0d0f1c; --bg2:#171a2c; --glass:rgba(255,255,255,.07); --glass2:rgba(255,255,255,.12);
+      --txt:#eef2ff; --muted:#b7c0e7; --acc:#a3d5ff; --ok:#a7f3d0; --warn:#fde68a; --pink:#ff9ec4;
+      --radius:22px; --shadow:0 12px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Helvetica Neue',Arial; color:var(--txt);
+      background: radial-gradient(1000px 600px at 75% -30%, #24316b 0%, transparent 60%),
+                 radial-gradient(800px 600px at -20% 10%, #1b2859 0%, transparent 60%),
+                 linear-gradient(180deg,var(--bg1),var(--bg2));}
+    .container{max-width:980px; margin:0 auto; padding:32px 20px 64px; position:relative}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{width:42px; height:42px; display:grid; place-items:center; border-radius:12px; background:var(--glass2); box-shadow:var(--shadow)}
+    h1{margin:0; font-family:"Playfair Display",serif; font-weight:700; font-size:clamp(24px,4vw,32px)}
+
+    .card{background:var(--glass); border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .hero{margin:26px 0; display:grid; grid-template-columns:1fr .9fr; gap:20px}
+    @media (max-width:880px){.hero{grid-template-columns:1fr}}
+
+    .lead{padding:18px 20px}
+    .lead h2{margin:.2rem 0 .6rem; font-size:clamp(22px,4vw,30px)}
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); font-size:14px}
+    .copy{font-size:14px; color:var(--muted)}
+
+    form{padding:16px 18px; display:flex; flex-direction:column; gap:16px}
+    .q{display:grid; gap:10px}
+    .q h4{margin:0; font-size:16px}
+    .opt{display:grid; gap:8px; margin-left:4px}
+    label{display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid rgba(255,255,255,.12); border-radius:12px; background:rgba(255,255,255,.04); cursor:pointer}
+    input[type="radio"]{accent-color:#9bd0ff}
+
+    .actions{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+    .btn{appearance:none; border:0; background:#9bd0ff; color:#0e1325; font-weight:800; padding:10px 14px; border-radius:12px; cursor:pointer; box-shadow:var(--shadow); text-decoration:none; display:inline-flex; align-items:center; gap:8px}
+    .btn.secondary{background:#c1c8ff}
+    .btn.ghost{background:transparent; color:var(--txt); border:1px solid rgba(255,255,255,.18)}
+
+    .result{display:none; padding:20px}
+    .result h3{margin:.2rem 0 .4rem; font-size:clamp(20px,4vw,26px)}
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); font-size:13px}
+    .box{margin-top:10px; padding:14px; border-radius:14px; background:rgba(253,232,138,.08); border:1px dashed rgba(253,232,138,.35)}
+
+    footer{margin-top:22px; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center}
+    .kbd{font-family: ui-monospace, Menlo, Consolas, monospace; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); padding:.1rem .4rem; border-radius:6px}
+
+    /* sparkles & confetti */
+    .stars{ position:fixed; inset:0; pointer-events:none; z-index:0; }
+    .stars span{ position:absolute; width:2px; height:2px; background:#fff; opacity:.9; border-radius:50%; animation: twinkle calc(4s + (var(--i)*.2s)) ease-in-out infinite; }
+    @keyframes twinkle{ 0%,100%{opacity:.2; transform:scale(.8)} 50%{opacity:1; transform:scale(1.2)} }
+    canvas#confetti{ position:fixed; inset:0; pointer-events:none; z-index:2; }
+  </style>
+</head>
+<body>
+  <!--
+    PERSONALIZA AQUÍ 🎯
+    - herName: su nombre (opcional)
+    - myName: tu nombre (aparece en el mensaje final y WhatsApp)
+  -->
+  <script>
+    const CONFIG = {
+      herName: "Emilia",
+      myName: "Martín"
+    };
+  </script>
+
+  <div class="stars" id="stars"></div>
+  <canvas id="confetti"></canvas>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">💫</div>
+        <h1>Test de Vibes</h1>
+      </div>
+      
+    </header>
+
+    <div class="hero">
+      <div class="card lead">
+        <h2>Hola, <span id="name-slot">Emilia</span>…</h2>
+        <div class="copy">Este test es <strong>solo para ti</strong>: respuestas cortitas → una vibra + un plan bonito. Yo, Martín, prometo hacerte feliz y pasar bonitos momentos.</div>
+        <div class="pill">🌌 Fondo estelar porque sí</div>
+      </div>
+
+      <form class="card" id="quiz">
+        <div class="pill" id="progress">1/8</div>
+        <div id="qbox"></div>
+        <div class="actions" style="padding:2px 2px 12px 2px;">
+          <button class="btn" type="button" id="nextBtn" disabled>Siguiente</button>
+          <button class="btn ghost" type="button" id="resetBtn">Empezar de nuevo</button>
+        </div>
+      </form>
+    </div>
+
+    <section class="card result" id="result">
+      <div class="badge" id="vibeTag">✨ Vibra</div>
+      <h3 id="title">Tu personalidad</h3>
+      <div class="copy" id="desc">Descripción breve.</div>
+      <ul id="reasons" class="copy" style="margin:10px 0 0 18px; line-height:1.6;"></ul>
+      <div class="box" id="flirt">Coqueteo suave aquí.</div>
+
+      <div class="actions" style="margin-top:12px;">
+        <button class="btn ghost" id="again">Rehacer test</button>
+      </div>
+      <div class="copy" style="margin-top:6px;">Si no te acomoda ahora, cero drama: lo dejamos para otro día 😊</div>
+    </section>
+
+    <footer>
+      <span class="copy">Hecho con cariño por <span id="myName">alguien con ganas de conocerte</span></span>
+      <span class="copy">Súbelo como <span class="kbd">index.html</span> a GitHub Pages</span>
+    </footer>
+  </div>
+
+  <script>
+    // ===== Estrellas de fondo =====
+    const stars = document.getElementById('stars');
+    const count = Math.min(150, Math.floor(window.innerWidth/7));
+    for(let i=0;i<count;i++){
+      const s=document.createElement('span');
+      s.style.left = Math.random()*100+'%';
+      s.style.top = Math.random()*100+'%';
+      s.style.setProperty('--i', i);
+      s.style.opacity = (0.3+Math.random()*0.7).toFixed(2);
+      stars.appendChild(s);
+    }
+
+    // ===== Confeti =====
+    const c = document.getElementById('confetti');
+    const ctx = c.getContext('2d');
+    let pieces=[]; function resize(){ c.width=innerWidth; c.height=innerHeight } addEventListener('resize',resize); resize();
+    function boom(){ for(let i=0;i<130;i++){ pieces.push({x:c.width/2,y:c.height/3,r:Math.random()*4+2,vx:(Math.random()-0.5)*6,vy:Math.random()*-7-3,a:Math.random()*Math.PI,s:Math.random()*0.2+0.02,color:`hsl(${Math.random()*360},90%,70%)`}); } }
+    ;(function loop(){ ctx.clearRect(0,0,c.width,c.height); pieces.forEach(p=>{ p.vy+=0.12; p.x+=p.vx; p.y+=p.vy; p.a+=p.s; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a); ctx.fillStyle=p.color; ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r); ctx.restore(); }); pieces=pieces.filter(p=>p.y<c.height+40); requestAnimationFrame(loop); })();
+
+    // ===== Config / nombres =====
+    const nameSlot = document.getElementById('name-slot');
+    const myNameEl = document.getElementById('myName');
+    function refreshNames(){ nameSlot.textContent = CONFIG.herName; myNameEl.textContent = CONFIG.myName || 'alguien con ganas de conocerte'; }
+    refreshNames();
+    // (Opcional) Campo de nombre: sólo si existe en el DOM
+    const nameInput = document.getElementById('nameInput');
+    if (nameInput) {
+      nameInput.addEventListener('keydown', e=>{
+        if(e.key==='Enter'){
+          const v = nameInput.value.trim();
+          if(v){ CONFIG.herName=v; refreshNames(); toast('Nombre guardado ✨'); }
+        }
+      });
+    }
+
+    // ===== Flujo de preguntas (branching) =====
+    const qbox = document.getElementById('qbox');
+    const nextBtn = document.getElementById('nextBtn');
+    const progress = document.getElementById('progress');
+
+    let step = 0;
+    const totalSteps = 8;
+    const answers = [];
+
+    function renderQuestion(){
+      nextBtn.disabled = true;
+      progress.textContent = `${step+1}/${totalSteps}`;
+      const q = getStep(step, answers);
+      qbox.innerHTML = '';
+      const wrap = document.createElement('div'); wrap.className='q';
+      wrap.innerHTML = `<h4>${q.text}</h4>`;
+      const opt = document.createElement('div'); opt.className='opt';
+      q.options.forEach((o,idx)=>{
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="radio" name="q${step}" value="${idx}"> <span>${o.t}</span>`;
+        label.querySelector('input').addEventListener('change',()=>{ nextBtn.disabled = false; });
+        opt.appendChild(label);
+      });
+      wrap.appendChild(opt); qbox.appendChild(wrap);
+    }
+
+    function getStep(i, ans){
+      // i=0
+      if(i===0){
+        return { text:'Para romper el hielo: ¿qué vibra te tinca para conocernos?', options:[
+          { t:'✨ Plan tranqui conversado', tags:['chill'] },
+          { t:'🧭 Mini aventura al aire libre', tags:['aventura'] },
+          { t:'🍣 Plan comida rica', tags:['foodie'] },
+          { t:'🖼️ Plan cultural + café', tags:['cultura','chill'] },
+        ] };
+      }
+      // i=1 (depende de la 0)
+      const first = ans[0]?.tags?.[0] || 'chill';
+      if(i===1){
+        if(first==='aventura'){
+          return { text:'Si el cielo está bonito, ¿cuál te llama más?', options:[
+            { t:'⛺ Acampar y ver las estrellas', tags:['aventura','astro'], plan:'Acampar y ver las estrellas' },
+            { t:'🌇 Mirador / cerro al atardecer', tags:['aventura'], plan:'Mirador al atardecer' },
+            { t:'🚶 Paseo urbano con fotitos', tags:['aventura'], plan:'Paseo con fotos' },
+          ] };
+        }
+        if(first==='foodie'){
+          return { text:'Ok, plan comida rica:', options:[
+            { t:'🍣 Sushi + conversa larga', tags:['foodie','chill'], plan:'Sushi + charla' },
+            { t:'🍽️ Comida rica (almuerzo o cena)', tags:['foodie','viva'], plan:'Comida rica' },
+            { t:'🧺 Picnic al atardecer (sin noche)', tags:['foodie','astro','chill'], plan:'Picnic al atardecer' },
+          ] };
+        }
+        if(first==='cultura'){
+          return { text:'Team cultura: ¿qué te tinca?', options:[
+            { t:'🪐 Planetario / charla del cielo', tags:['cultura','astro'], plan:'Planetario' },
+            { t:'🖼️ Expo cortita + café', tags:['cultura','chill'], plan:'Expo + café' },
+            { t:'🎬 Cine y comentarios post', tags:['cultura','chill'], plan:'Cine + conversación' },
+          ] };
+        }
+        // chill (default)
+        return { text:'Mood tranqui: ¿qué preferirías?', options:[
+          { t:'☕ Café + librería', tags:['chill','cultura'], plan:'Café + librería' },
+          { t:'🎲 Juegos/charla en un lugar piola', tags:['chill'], plan:'Juegos + charla' },
+          { t:'🌌 Picnic bajo las estrellas (sin camping)', tags:['chill','astro'], plan:'Picnic bajo estrellas' },
+        ] };
+      }
+      // i=2 horario
+      if(i===2){
+        return { text:'¿Qué horario te hace más sentido?', options:[
+          { t:'🌇 Atardecer', tags:['atardecer','chill'] },
+          { t:'🌙 Noche para mirar estrellas', tags:['astro','chill'] },
+          { t:'🌤️ Tarde', tags:['viva'] },
+        ] };
+      }
+      // i=3 ritmo
+      if(i===3){
+        return { text:'¿Qué ritmo te acomoda para una primera salida?', options:[
+          { t:'🧊 Vamos tranqui y vemos', tags:['chill'] },
+          { t:'😄 Tengo ganas', tags:['viva'] },
+        ] };
+      }
+      // i=4 entorno
+      if(i===4){
+        return { text:'¿Dónde te sientes más tú?', options:[
+          { t:'⛰️ Montaña / cerro', tags:['aventura'] },
+          { t:'🌊 Mar / costa', tags:['chill'] },
+          { t:'🏙️ Ciudad con rincones', tags:['cultura'] },
+        ] };
+      }
+      // i=5 detalles
+      if(i===5){
+        return { text:'Te gana más…', options:[
+          { t:'🎁 Un detalle pensado', tags:['chill','cultura'] },
+          { t:'🎉 Una sorpresa espontánea', tags:['viva','aventura'] },
+          { t:'🧩 Un poquito de ambos', tags:['chill','viva'] },
+        ] };
+      }
+      // i=6 cómo nos hablamos
+      if(i===6){
+        return { text:'Cuando conectas con alguien, prefieres…', options:[
+          { t:'💬 Mensajes tranquilos', tags:['chill'] },
+          { t:'🎙️ Audios cortitos', tags:['viva'] },
+          { t:'📞 Llamada breve', tags:['cultura','viva'] },
+        ] };
+      }
+      // i=7 guiño final
+      if(i===7){
+        return { text:'Elige un guiño para la primera salida:', options:[
+          { t:'🌌 Mirar estrellas un ratito', tags:['astro','chill'] },
+          { t:'🍽️ Comida rica juntos', tags:['foodie','viva'] },
+          { t:'🪐 Visita corta al planetario', tags:['cultura','astro'] },
+          { t:'🎬 Película y comentarios', tags:['cultura','chill'] },
+        ] };
+      }
+      return { text:'Fin', options:[] };
+    }
+
+    nextBtn.addEventListener('click', ()=>{
+      const checked = qbox.querySelector('input[type=radio]:checked');
+      if(!checked) return;
+      const idx = Number(checked.value);
+      const q = getStep(step, answers);
+      const chosen = q.options[idx];
+      answers[step] = { text:q.text, choice:chosen.t, tags:chosen.tags, plan:chosen.plan };
+      if(step < totalSteps-1){ step++; renderQuestion(); window.scrollTo({top:0, behavior:'smooth'}); }
+      else { showResult(); }
+    });
+
+    function pickArchetype(tally, astro){
+      // Ordenar tags por puntaje (excluye astro para top habitual)
+      const sorted = Object.entries(tally).filter(([k])=>k!=='astro').sort((a,b)=>b[1]-a[1]);
+      const top1 = sorted[0]?.[0] || 'chill';
+      const top2 = sorted[1]?.[0] || 'cultura';
+      // Arquetipos serios (frases en triada)
+      if(astro && (top1==='aventura' || top2==='aventura')) return {titleTag:'🧭🌌', title:'aventura, compañía y paz', tagline:'Mini aventuras al aire libre, buena compañía y calma para disfrutar.'};
+      if(astro && (top1==='chill' || top2==='chill')) return {titleTag:'☕🌌', title:'tranquilidad, paz y cariño', tagline:'Ritmo pausado, conversación honesta y un rato para mirar el cielo.'};
+      if(top1==='foodie' && (top2==='viva' || top2==='chill')) return {titleTag:'🍣😊', title:'recorrer, comer y reír', tagline:'Paseos simples, sabores compartidos y buen humor.'};
+      if(top1==='cultura' && top2==='chill') return {titleTag:'🖼️☕', title:'aprender, conversar y cuidar', tagline:'Cosas nuevas, diálogo tranquilo y atención a los pequeños detalles.'};
+      if(top1==='aventura' && top2==='viva') return {titleTag:'🌆🎶', title:'moverse, descubrir y sonreír', tagline:'Explorar la ciudad, música en el camino y energía amable.'};
+      if(top1==='cultura' && top2==='viva') return {titleTag:'🖼️🎵', title:'curiosidad, ritmo y conexión', tagline:'Ideas frescas, un poco de movimiento y conexión genuina.'};
+      if(top1==='foodie' && top2==='cultura') return {titleTag:'🥐📚', title:'sabores, conversación y detalle', tagline:'Un buen café, algo rico y una conversación que suma.'};
+      return {titleTag:'☕✨', title:'calma, escucha y cercanía', tagline:'Simplicidad, respeto y ganas de construir con calma.'};
+    }
+
+    function showResult(){
+      // Tallies
+      const tally = { chill:0, aventura:0, cultura:0, foodie:0, viva:0, astro:0 };
+      answers.forEach(a=> a.tags?.forEach(t=> tally[t] = (tally[t]||0)+1));
+
+      const astro = (tally.astro||0) > 0;
+      // Elegir plan si existir alguno marcado
+      let plan = answers.map(a=>a.plan).filter(Boolean).pop();
+      if(!plan){
+        // fallback por mayor tag
+        const top = Object.entries(tally).filter(([k])=>k!=='astro').sort((a,b)=>b[1]-a[1])[0]?.[0] || 'chill';
+        plan = ({chill:'Café + librería', aventura:'Paseo al atardecer', cultura:'Expo + café', foodie:'Sushi + charla', viva:'Comida rica'})[top];
+      }
+
+      // Título segun vibe
+      const {titleTag, title, tagline} = pickArchetype(tally, astro);
+
+      // Mensajes finales
+      const name = CONFIG.herName || 'tú';
+      const flirtLine = astro
+        ? `Si te tinca, ${name}, te enseño a encontrar Orión. Yo llevo la manta; tú eliges la playlist para el camino.`
+        : `Yo pongo la primera ronda y tú me cuentas una historia impopular. Trato hecho, ${name}?`;
+
+      // Pintar UI
+      document.getElementById('vibeTag').textContent = `${titleTag} ${title}`;
+      document.getElementById('title').textContent = `Eres: ${title}`;
+      document.getElementById('desc').textContent = tagline;
+      document.getElementById('flirt').innerHTML = `Okiii emiiii bonita, te enseñaré a encontrar Orión tarde o temprano. <br><strong>PERO</strong> tu eliges la playlist (tienes gustazos) y el plan <em>${plan}</em>. <br>demonos la oportunidad, vamos despacito y todo bien. <br><span class="copy">Recuerda mandarme lo que te salió jijiji</span>`;
+
+      // Construir razones/justificación tipo test
+      const reasons = [];
+      if(astro) reasons.push('mirar el cielo y perdernos un rato entre constelaciones');
+      if((tally.chill||0)>0) reasons.push('charlas sin apuro y detalles bonitos');
+      if((tally.aventura||0)>0) reasons.push('mini aventuras y atardeceres piola');
+      if((tally.cultura||0)>0) reasons.push('descubrir cosas nuevas y comentarlas');
+      if((tally.foodie||0)>0) reasons.push('compartir algo rico y probar sabores');
+      if((tally.viva||0)>0) reasons.push('buena onda y risa fácil');
+      const topReasons = reasons.slice(0,3).map(r=>`<li>• ${r}</li>`).join('');
+      const reasonsEl = document.getElementById('reasons');
+      if(reasonsEl) reasonsEl.innerHTML = topReasons;
+
+      document.getElementById('result').style.display='block';
+      boom(); toast('Resultado listo 💫');
+      document.getElementById('result').scrollIntoView({behavior:'smooth'});
+
+      document.getElementById('result').style.display='block';
+      boom(); toast('Resultado listo 💫');
+      document.getElementById('result').scrollIntoView({behavior:'smooth'});
+    }
+
+    // Inicializar
+    renderQuestion();
+
+    // Reinicio
+    document.getElementById('resetBtn').addEventListener('click', ()=>{ step=0; answers.length=0; renderQuestion(); document.getElementById('result').style.display='none'; });
+    const againBtn = document.getElementById('again');
+    if (againBtn) {
+      againBtn.addEventListener('click', ()=>{ step=0; answers.length=0; document.getElementById('result').style.display='none'; renderQuestion(); window.scrollTo({top:0, behavior:'smooth'}); });
+    }
+
+    // ===== Toast =====
+    let toastTimeout; function toast(msg){
+      let t=document.getElementById('toast'); if(!t){ t=document.createElement('div'); t.id='toast'; document.body.appendChild(t);
+        Object.assign(t.style,{position:'fixed',left:'50%',bottom:'26px',transform:'translateX(-50%)',padding:'10px 14px',background:'rgba(0,0,0,.6)',color:'#fff',border:'1px solid rgba(255,255,255,.2)',borderRadius:'12px',zIndex:9999,boxShadow:'0 10px 30px rgba(0,0,0,.3)'}); }
+      t.textContent=msg; t.style.opacity='1'; clearTimeout(toastTimeout); toastTimeout=setTimeout(()=>{t.style.opacity='0'},1800);
+    }
+    
+    // ===== Utilities & Tests =====
+    // copyText util (usado por el botón Copiar)
+    async function copyText(text){
+      try { await navigator.clipboard.writeText(text); toast('Copiado ✔'); }
+      catch (e) { toast('No se pudo copiar'); }
+    }
+
+    // Self-tests simples para evitar nulls y validar branching
+    (function runSelfTests(){
+      const results = [];
+      const assert = (name, cond) => results.push({name, pass: !!cond});
+      assert('Elemento qbox', !!document.getElementById('qbox'));
+      assert('Botón nextBtn', !!document.getElementById('nextBtn'));
+      assert('Píldora progress', !!document.getElementById('progress'));
+      const s0 = getStep(0, []);
+      assert('getStep(0) con opciones', s0 && Array.isArray(s0.options) && s0.options.length>0);
+      const s1a = getStep(1, [{tags:['aventura']}]);
+      assert('branch aventura incluye "Acampar"', s1a && s1a.options && s1a.options.some(o=>/Acampar/.test(o.t)));
+      // Tests existentes ↑ (no modificados)
+      // Nuevos tests para extensión a 8 pasos y arquetipos
+      assert('totalSteps = 8', (typeof totalSteps!=='undefined') && totalSteps===8);
+      const s7 = getStep(7, []);
+      assert('getStep(7) con opciones', s7 && Array.isArray(s7.options) && s7.options.length>0);
+      const arch1 = pickArchetype({chill:0, aventura:3, cultura:0, foodie:0, viva:2, astro:1}, true);
+      assert('pickArchetype aventura+astro → aventura, compañía y paz', arch1 && /aventura, compañía y paz/.test(arch1.title));
+      const arch2 = pickArchetype({chill:3, aventura:0, cultura:2, foodie:0, viva:0, astro:1}, true);
+      assert('pickArchetype chill+astro → tranquilidad, paz y cariño', arch2 && /tranquilidad, paz y cariño/.test(arch2.title));
+      const passed = results.filter(r=>r.pass).length;
+      console.log('[Self-tests]', results);
+      const badge = document.createElement('span');
+      badge.className = 'pill'; badge.style.marginLeft='6px';
+      badge.textContent = `Tests: ${passed}/${results.length} OK`;
+      const footer = document.querySelector('footer');
+      if(footer) footer.appendChild(badge);
+    })();
+
+  </script>
+</body>
+</html>
