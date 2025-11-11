@@ -207,8 +207,8 @@
         if(first==='foodie'){
           return { text:'Ok, plan comida rica:', options:[
             { t:'🍣 Sushi + conversa larga', tags:['foodie','chill'], plan:'Sushi + charla' },
-            { t:'🍽️ Comida rica (almuerzo o cena)', tags:['foodie','viva'], plan:'Comida rica' },
-            { t:'🧺 Picnic al atardecer (sin noche)', tags:['foodie','astro','chill'], plan:'Picnic al atardecer' },
+            { t:'🍽️ Comida rica (mcdonalds o derivados)', tags:['foodie','viva'], plan:'Comida rica' },
+            { t:'🧺 Picnic al atardecer ', tags:['foodie','astro','chill'], plan:'Picnic al atardecer' },
           ] };
         }
         if(first==='cultura'){
@@ -220,7 +220,7 @@
         }
         // chill (default)
         return { text:'Mood tranqui: ¿qué preferirías?', options:[
-          { t:'☕ Café + librería', tags:['chill','cultura'], plan:'Café + librería' },
+          { t:'☕ Café + salida cultural', tags:['chill','cultura'], plan:'Café + librería' },
           { t:'🎲 Juegos/charla en un lugar piola', tags:['chill'], plan:'Juegos + charla' },
           { t:'🌌 Picnic bajo las estrellas (sin camping)', tags:['chill','astro'], plan:'Picnic bajo estrellas' },
         ] };
@@ -236,7 +236,7 @@
       // i=3 ritmo
       if(i===3){
         return { text:'¿Qué ritmo te acomoda para una primera salida?', options:[
-          { t:'🧊 Vamos tranqui y vemos', tags:['chill'] },
+          { t:'🧊 Vamos tranquilos y vemos', tags:['chill'] },
           { t:'😄 Tengo ganas', tags:['viva'] },
         ] };
       }
